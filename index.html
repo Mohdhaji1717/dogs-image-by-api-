@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get the dogs image by Api</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    main {
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    #button {
+      margin-bottom: 40px;
+      font-size: 25px;
+      padding: 15px;
+      border-radius: 25px;
+    }
+    #error {
+      font-size: 50px;
+      color: red;
+    }
+    #image img{
+        height: 300px;
+        width: 500px;
+    }
+  </style>
+  <body>
+    <main>
+      <button id="button">Get Image</button>
+      <div id="image">
+        <img src="" />
+      </div>
+    </main>
+    <script>
+      const btn = document.querySelector("#button");
+      const image = document.querySelector("#image");
+      const api = "https://dog.ceo/api/breeds/image/random";
+
+      btn.addEventListener("click", async function () {
+        const response = await fetch(api);
+        if (response.ok) {
+          const data = await response.json();
+          //  console.log(data.message);
+          image.innerHTML = `<img src="${data.message}" height="500px" width="500px">`;
+        } else {
+          image.innerHTML = `<p id="error">404 Error Api</p>`;
+        }
+      });
+    </script>
+  </body>
+</html>
